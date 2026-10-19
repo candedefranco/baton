@@ -72,7 +72,7 @@ Any web page you have open can send requests to `localhost`, so a local server t
 
 ```bash
 go test ./...                    # player and server, with fakes
-node --test web/                 # gesture logic
+node --test web/*.test.js        # gesture logic
 go run . --dry-run               # try it without touching your music
 BATON_INTEGRATION=1 go test ./internal/player -run RealMac -v   # reads your Mac's real state, changes nothing
 ```
