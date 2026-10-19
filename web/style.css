@@ -1,0 +1,168 @@
+:root {
+  --bg: #0d1117;
+  --panel: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --green: #3fb950;
+  --blue: #79c0ff;
+  --purple: #d2a8ff;
+  --orange: #ffa657;
+  --red: #ff7b72;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px 16px 40px;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--mono);
+}
+
+header, main { max-width: 1240px; margin: 0 auto; }
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 16px;
+  margin-bottom: 16px;
+}
+
+h1 { margin: 0; font-size: 22px; }
+.prompt { color: var(--muted); font-weight: 400; }
+.note { color: var(--purple); }
+.tagline { margin: 0; color: var(--muted); }
+.status { margin: 0 0 0 auto; color: var(--muted); font-size: 13px; }
+.status.ok { color: var(--green); }
+.status.warn { color: var(--orange); }
+.status.err { color: var(--red); }
+
+main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  main { grid-template-columns: minmax(0, 1fr); }
+  .status { margin-left: 0; width: 100%; }
+}
+
+.term {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.dots { display: flex; gap: 6px; }
+.dots i { width: 10px; height: 10px; border-radius: 50%; background: #484f58; }
+.dots i:nth-child(1) { background: #ff5f57; }
+.dots i:nth-child(2) { background: #febc2e; }
+.dots i:nth-child(3) { background: #28c840; }
+
+.term-body { margin: 0; padding: 12px 14px; }
+
+aside { display: grid; gap: 16px; }
+
+.stage-body { position: relative; background: #010409; }
+
+canvas { display: block; width: 100%; height: auto; }
+
+.flash {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  font-size: clamp(48px, 10vw, 120px);
+  color: var(--text);
+  text-shadow: 0 0 24px rgba(121, 192, 255, .6);
+  opacity: 0;
+  transform: scale(.85);
+  transition: opacity .35s, transform .35s;
+}
+
+.flash.show { opacity: 1; transform: scale(1); transition: none; }
+
+.banner {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: rgba(13, 17, 23, .88);
+  color: var(--orange);
+  font-size: 13px;
+}
+
+.np-app { margin: 0; color: var(--muted); font-size: 12px; }
+.np-state { color: var(--muted); }
+.np-state.playing { color: var(--green); }
+.np-track { margin: 6px 0 0; font-size: 16px; font-weight: 700; overflow-wrap: anywhere; }
+.np-artist { margin: 0; color: var(--purple); min-height: 1.5em; }
+
+.volume { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+.volume .label { color: var(--muted); font-size: 12px; }
+.volume .num { width: 3ch; text-align: right; color: var(--blue); }
+.bar { flex: 1; height: 8px; border-radius: 4px; background: #21262d; overflow: hidden; }
+.fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--blue), var(--purple)); transition: width .12s; }
+.volume.live .fill { transition: none; }
+.volume.live .num { color: var(--orange); }
+
+.gestures { list-style: none; display: grid; gap: 10px; }
+.gestures li {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  transition: border-color .2s, background .2s;
+}
+.gestures li.active { border-color: var(--green); background: rgba(63, 185, 80, .08); }
+.gestures .icon { font-size: 22px; width: 28px; text-align: center; }
+.gestures small { color: var(--muted); font-size: 12px; }
+
+.log {
+  list-style: none;
+  height: 132px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 2px;
+  font-size: 12px;
+}
+.log li { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.log .time { color: var(--muted); }
+.log .cmd { color: var(--green); }
+.log .err { color: var(--red); }
+
+.keys { margin: 0; color: var(--muted); font-size: 12px; }
+kbd {
+  padding: 1px 5px;
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  font: inherit;
+  color: var(--text);
+}

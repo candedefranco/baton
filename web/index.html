@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="baton-token" content="{{BATON_TOKEN}}">
+  <title>baton</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%99%AA%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1><span class="prompt">~/</span>baton <span class="note">♪</span></h1>
+    <p class="tagline">conduct your music with your hand</p>
+    <p id="status" class="status">starting…</p>
+  </header>
+
+  <main>
+    <section class="term stage">
+      <div class="term-bar"><span class="dots"><i></i><i></i><i></i></span><span class="term-title" id="stage-title">camera</span></div>
+      <div class="stage-body">
+        <canvas id="view" width="1280" height="720" aria-label="Camera view with the tracked hand"></canvas>
+        <video id="video" playsinline muted hidden></video>
+        <div id="flash" class="flash" aria-live="polite"></div>
+        <div id="banner" class="banner" hidden></div>
+      </div>
+    </section>
+
+    <aside>
+      <section class="term">
+        <div class="term-bar"><span class="dots"><i></i><i></i><i></i></span><span class="term-title">now playing</span></div>
+        <div class="term-body">
+          <p class="np-app"><span id="np-state" class="np-state">■</span> <span id="np-app">—</span></p>
+          <p id="np-track" class="np-track">nothing yet</p>
+          <p id="np-artist" class="np-artist"></p>
+          <div class="volume">
+            <span class="label">vol</span>
+            <div class="bar"><div id="vol-fill" class="fill"></div></div>
+            <span id="vol-num" class="num">–</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="term">
+        <div class="term-bar"><span class="dots"><i></i><i></i><i></i></span><span class="term-title">gestures</span></div>
+        <ul class="term-body gestures">
+          <li id="g-hold"><span class="icon">✋</span><span><b>hold your palm</b> still<br><small>play / pause</small></span></li>
+          <li id="g-swipe"><span class="icon">👋</span><span><b>swipe</b> left or right<br><small>previous / next song</small></span></li>
+          <li id="g-pinch"><span class="icon">🤏</span><span><b>pinch</b> and move up or down<br><small>volume</small></span></li>
+        </ul>
+      </section>
+
+      <section class="term">
+        <div class="term-bar"><span class="dots"><i></i><i></i><i></i></span><span class="term-title">log</span></div>
+        <ol id="log" class="term-body log"></ol>
+      </section>
+
+      <p class="keys">keys: <kbd>space</kbd> play/pause · <kbd>←</kbd> <kbd>→</kbd> songs · <kbd>↑</kbd> <kbd>↓</kbd> volume</p>
+    </aside>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
